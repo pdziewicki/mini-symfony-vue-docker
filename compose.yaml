@@ -3,17 +3,26 @@ services:
     build:
       context: ./nginx
     volumes:
-      - app:/var/www/app/
+      - front:/usr/share/nginx/
+      - back:/var/www/app/
     ports:
-      - 8000:80
+      - "80:80"
+      - "8000:8000"
+
+  front:
+    build:
+      context: ./front
+    volumes:
+      - front:/app/
 
   back:
     build:
       context: ./back
     volumes:
-      - app:/var/www/app/
+      - back:/var/www/app/
     expose:
       - 9000
 
 volumes:
-  app:
+  front:
+  back:

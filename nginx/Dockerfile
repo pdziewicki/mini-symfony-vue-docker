@@ -1,3 +1,6 @@
 FROM nginx:1.25-alpine
 
-COPY default.conf /etc/nginx/conf.d/default.conf
+RUN rm /etc/nginx/conf.d/default.conf
+
+COPY front.conf /etc/nginx/conf.d/front.conf
+COPY back.conf /etc/nginx/conf.d/back.conf
