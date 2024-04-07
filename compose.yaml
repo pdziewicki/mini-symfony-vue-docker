@@ -1,0 +1,19 @@
+services:
+  nginx:
+    build:
+      context: ./nginx
+    volumes:
+      - app:/var/www/app/
+    ports:
+      - 8000:80
+
+  back:
+    build:
+      context: ./back
+    volumes:
+      - app:/var/www/app/
+    expose:
+      - 9000
+
+volumes:
+  app:
