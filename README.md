@@ -27,5 +27,5 @@ $ docker compose down --remove-orphans -v
 - [x] frontend stub
 - [x] basic nginx config
 - [ ] database setup
-- [ ] communication between services
+- [x] communication between services
 - [ ] nix reproducible dev environment
