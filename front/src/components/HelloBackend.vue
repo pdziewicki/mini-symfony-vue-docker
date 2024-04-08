@@ -8,13 +8,12 @@
 </template>
 
 <script setup>
-  import {ref, onMounted} from "vue";
+  import { ref, onMounted } from "vue";
 
   const hello = ref({})
 
   onMounted(async () => {
     hello.value = await fetchHello();
-    // hello.value = { "message": "Hello", "path": "/backend/hello" };
   })
 
   const fetchHello = async () => {

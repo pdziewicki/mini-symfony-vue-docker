@@ -1,7 +1,8 @@
 <script setup>
-import HelloBackend from './components/HelloBackend.vue'
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+  import HelloBackend from './components/HelloBackend.vue'
+  import ContactBackend from './components/ContactBackend.vue'
+  import HelloWorld from './components/HelloWorld.vue'
+  import TheWelcome from './components/TheWelcome.vue'
 </script>
 
 <template>
@@ -15,6 +16,7 @@ import TheWelcome from './components/TheWelcome.vue'
 
   <main>
     <HelloBackend />
+    <ContactBackend />
     <TheWelcome />
   </main>
 </template>

@@ -1,10 +1,12 @@
+version: '3'
+
 services:
   nginx:
     build:
       context: ./nginx
     volumes:
-      - front:/usr/share/nginx/
-      - back:/var/www/app/
+      - front:/var/www/front/
+      - back:/var/www/back/
     ports:
       - "80:80"
       - "8000:8000"
@@ -13,16 +15,33 @@ services:
     build:
       context: ./front
     volumes:
-      - front:/app/
+      - front:/var/www/front/
 
   back:
     build:
       context: ./back
     volumes:
-      - back:/var/www/app/
+      - back:/var/www/back/
     expose:
       - 9000
+
+  db:
+    image: postgres:${POSTGRES_VERSION:-16}-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
+      POSTGRES_USER: ${POSTGRES_USER:-app}
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+    ports:
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data:rw
 
 volumes:
   front:
   back:
+  db:

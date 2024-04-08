@@ -1,6 +1,6 @@
 FROM php:8.3-fpm-alpine AS base
 
-WORKDIR /var/www/app
+WORKDIR /var/www/back
 
 FROM base AS builder
 
@@ -11,4 +11,9 @@ RUN COMPOSER_ALLOW_SUPERUSER=1 composer install
 
 FROM base AS runner
 
-COPY --from=builder /var/www/app .
+RUN apk --no-cache add postgresql-dev  \
+ && docker-php-ext-install pdo_pgsql
+#  \
+#  && apk del postgresql-dev
+
+COPY --from=builder /var/www/back .
